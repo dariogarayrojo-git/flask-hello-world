@@ -52,3 +52,4 @@ def sensor():
     except Exception as e:
         return f"Failed to connect: {e}"
 
+
