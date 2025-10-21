@@ -1,7 +1,7 @@
+from flask import Flask
 import psycopg2
 from dotenv import load_dotenv
 import os
-from flask import Flask
 
 # Load environment variables from .env
 load_dotenv()
