@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mi primera página</title>
+  <title>Ejemplo con Estilo</title>
+  <style>
+    /* Estilo interno para todos los elementos <p> */
+    p {
+      font-family: sans-serif; /* Usa una fuente de texto genérica */
+      line-height: 1.6;       /* Espaciado entre líneas */
+      text-align: left;       /* Alineación del texto */
+    }
+    /* Estilo para el encabezado H1 */
+    h1 {
+      color: #007bff; /* Color azul */
+      text-align: center; /* Centra el texto */
+    }
+  </style>
 </head>
 <body>
 
-  <h1>¡Bienvenido a mi sitio!</h1>
-  
-  <p>Este es un párrafo de ejemplo en mi página web.</p>
-  
-  <p>Aquí tienes un enlace a {Link: una página externa https://www.google.com}.</p>
-  
-  <a href="https://www.google.com" target="_blank">Visitar Google</a>
-  
-  <p>Y aquí puedes ver una imagen:</p>
-  
-  <img src="imagen.jpg" alt="Descripción de la imagen">
+  <!-- Contenido con estilo en línea y con estilo interno -->
+  <h1>¡Hola, Mundo!</h1>
+  <p style="color: green;">Este es un párrafo con estilo en línea.</p>
+  <p>Este es otro párrafo que usa los estilos definidos en el <head>.</p>
 
 </body>
-</html> [16]
+</html>
