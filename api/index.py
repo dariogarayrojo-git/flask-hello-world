@@ -41,7 +41,7 @@ def sensor():
     except Exception as e:
         return f"Failed to connect: {e}"
 
-@app.route("/dashboard")
+@app.route("/dashboard", methods=["GET", "POST"])
 def dashboard():
     try:
         conn = psycopg2.connect(CONNECTION_STRING)
@@ -49,8 +49,23 @@ def dashboard():
 
         cur.execute("SELECT DISTINCT sensor_id FROM sensores")
         rows = cur.fetchall()
+        
+        datos = []
+        sensor_id = None
 
-        return render_template("dashboard.html", rows=rows)
+        if request.method == "POST":
+            sensor_id = request.form.get("sensor_id")
+            if sensor_id:
+                cur.execute("""
+                    SELECT value, created_at
+                    FROM rows
+                    WHERE sensor_id = %s
+                    ORDER BY created_at DESC
+                    LIMIT 10
+                """, (sensor_id,))
+                datos = cur.fetchall()
+        
+        return render_template("dashboard.html", rows=rows, datos=datos, sensor_id=sensor_id)
     
     except Exception as e:
         return f"<h3>Error: {e}</h3>"
