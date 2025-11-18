@@ -41,6 +41,18 @@ def sensor():
     except Exception as e:
         return f"Failed to connect: {e}"
 
+@app.route("/dashboard")
+def dashboard():
+    try:
+        conn = psycopg2.connect(CONNECTION_STRING)
+        cur = conn.cursor()
+
+        cur.execute("""
+            SELECT DISTINCT sensor_id 
+            FROM sensores
+            """, (sensor_id,))
+        rows = cur.fetchall()
+
 @app.route("/sensor/<int:sensor_id>")
 def get_sensor(sensor_id):
     try:
