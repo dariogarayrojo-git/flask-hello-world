@@ -22,16 +22,25 @@
   <h1>Selecciona un sensor</h1>
   <p>Elige un sensor desde la base de datos:</p>
 
-  <form action="/sensor" method="get">
-    <label for="sensor_id">Sensor ID:</label>
-    <select name="sensor_id" id="sensor_id">
-      {% for row in rows %}
-        <option value="{{ row[0] }}">{{ row[0] }}</option>
-      {% endfor %}
-    </select>
-    <br><br>
-    <input type="submit" value="Ver datos">
+  <form id="sensorForm" onsubmit="redirigir(event)">
+  <label for="sensor_id">Sensor ID:</label>
+  <select name="sensor_id" id="sensor_id">
+    {% for row in rows %}
+      <option value="{{ row[0] }}">{{ row[0] }}</option>
+    {% endfor %}
+  </select>
+  <br><br>
+  <input type="submit" value="Ver datos">
   </form>
+  
+  <script>
+  function redirigir(event) {
+    event.preventDefault(); // Evita que el formulario se envíe normalmente
+    const sensorId = document.getElementById("sensor_id").value;
+    window.location.href = `/sensor/${sensorId}`;
+  }
+  </script>
+
 
   <p>Al hacer clic en "Ver datos", se mostrará la información del sensor seleccionado.</p>
 
