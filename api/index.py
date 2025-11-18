@@ -53,6 +53,15 @@ def dashboard():
             """, (sensor_id,))
         rows = cur.fetchall()
 
+        return render_template("dashboard.html", sensor_id=sensor_id, rows=rows)
+    
+    except Exception as e:
+        return f"<h3>Error: {e}</h3>"
+
+    finally:
+        if 'conn' in locals():
+            conn.close()
+        
 @app.route("/sensor/<int:sensor_id>")
 def get_sensor(sensor_id):
     try:
