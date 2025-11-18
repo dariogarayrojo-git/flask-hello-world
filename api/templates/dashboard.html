@@ -3,36 +3,41 @@
 <head>
   <title>Dashboard de Sensores</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-    }
-    h1 {
-      color: #333;
-    }
-    select, input[type="submit"] {
-      padding: 8px;
-      font-size: 16px;
-      margin-top: 10px;
-    }
+    body { font-family: Arial; margin: 40px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
   </style>
 </head>
 <body>
-  <h1>Selecciona un sensor</h1>
-  <p>Elige un sensor desde la base de datos:</p>
 
-  <form action="/sensor" method="get">
+  <h1>Selecciona un sensor</h1>
+  <form method="post" action="/dashboard">
     <label for="sensor_id">Sensor ID:</label>
     <select name="sensor_id" id="sensor_id">
-      {% for row in rows %}
-        <option value="{{ row[0] }}">{{ row[0] }}</option>
+      {% for s in sensores %}
+        <option value="{{ s[0] }}" {% if s[0] == sensor_id %}selected{% endif %}>{{ s[0] }}</option>
       {% endfor %}
     </select>
-    <br><br>
     <input type="submit" value="Ver datos">
   </form>
 
-  <p>Al hacer clic en "Ver datos", se mostrará la información del sensor seleccionado.</p>
+  {% if datos %}
+    <h2>Sensor {{ sensor_id }} — Últimas 10 lecturas</h2>
+    <h3>📋 Tabla de datos</h3>
+    <table>
+      <tr>
+        <th>Timestamp</th>
+        <th>Value</th>
+      </tr>
+      {% for row in datos %}
+        <tr>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[0] }}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% endif %}
 
 </body>
 </html>
