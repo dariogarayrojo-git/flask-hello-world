@@ -47,10 +47,7 @@ def dashboard():
         conn = psycopg2.connect(CONNECTION_STRING)
         cur = conn.cursor()
 
-        cur.execute("""
-            SELECT DISTINCT sensor_id 
-            FROM sensores
-            """, (sensor_id,))
+        cur.execute("SELECT DISTINCT sensor_id FROM sensores")
         rows = cur.fetchall()
 
         return render_template("dashboard.html", rows=rows)
