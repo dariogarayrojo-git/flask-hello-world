@@ -53,7 +53,7 @@ def dashboard():
             """, (sensor_id,))
         rows = cur.fetchall()
 
-        return render_template("dashboard.html", sensor_id=sensor_id, rows=rows)
+        return render_template("dashboard.html", rows=rows)
     
     except Exception as e:
         return f"<h3>Error: {e}</h3>"
